@@ -12,7 +12,8 @@ function Navbar() {
         display: 'flex', 
         gap: '20px', 
         margin: 0, 
-        padding: 0 
+        padding: 0,
+        justifyContent: 'flex-start'
       }}>
         <li>
           <Link 
