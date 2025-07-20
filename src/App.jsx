@@ -1,10 +1,13 @@
-import Counter from './components/Counter';
+import UserProfile from './components/UserProfile';
+import UserContext from './UserContext';
 
 function App() {
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+
   return (
-    <div>
-      <Counter />
-    </div>
+    <UserContext.Provider value={userData}>
+      <UserProfile />
+    </UserContext.Provider>
   );
 }
 
