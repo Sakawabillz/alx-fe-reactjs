@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import UserContext from '../UserContext';
+import UserContext from '../../alx-react-app-props/UserContext';
 
 function UserProfile() {
   const userData = useContext(UserContext);
