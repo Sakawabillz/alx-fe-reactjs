@@ -1,13 +1,15 @@
-import UserProfile from './components/UserProfile';
-import UserContext from '../alx-react-app-props/UserContext';
+// src/App.jsx
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeList from './components/RecipeList';
 
 function App() {
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
-
   return (
-    <UserContext.Provider value={userData}>
-      <UserProfile />
-    </UserContext.Provider>
+    <div style={{ padding: '2rem' }}>
+      <h1>🍽️ Recipe Sharing App</h1>
+      <AddRecipeForm />
+      <hr />
+      <RecipeList />
+    </div>
   );
 }
 
