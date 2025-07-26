@@ -5,7 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A recipe sharing application built with React and Vite">
-    <meta name="theme-color" content="#ffffff">
+    <!-- Theme color for supported browsers -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    <!-- Alternative for some mobile browsers -->
+    <meta name="msapplication-navbutton-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>🍽️ Recipe Sharing App</title>
 
     <!-- Preload critical resources -->
@@ -14,10 +19,13 @@
 
     <!-- Preload the main script -->
     <link rel="modulepreload" href="/src/main.jsx">
+
+    <!-- CSS (injected by Vite) -->
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- Entry point for Vite -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
