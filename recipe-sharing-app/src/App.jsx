@@ -1,31 +1,19 @@
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import AddRecipeForm from './components/AddRecipeForm';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
-import RecipeDetails from './components/RecipeDetails';
-import SearchBar from './components/SearchBar';
+import EditRecipeForm from './components/EditRecipeForm';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 function App() {
   return (
-    <Router> {/* ✅ Contains 'Router' as required */}
-      <div style={{ padding: '2rem' }}>
-        <h1>🍽️ Recipe Sharing App</h1>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
-        <hr />
+    <Router>
+      <div>
+        <h1>Recipe Sharing App</h1>
+        <FavoritesList />
+        <RecommendationsList />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <AddRecipeForm />
-                <RecipeList />
-                <SearchBar />
-              </>
-            }
-          />
-          <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/edit/:id" element={<EditRecipeForm />} />
         </Routes>
       </div>
     </Router>
