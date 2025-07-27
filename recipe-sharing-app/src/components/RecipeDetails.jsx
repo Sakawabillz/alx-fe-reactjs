@@ -1,5 +1,6 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import useRecipeStore from '../store/recipeStore';
+import DeleteRecipeButton from './DeleteRecipeButton';
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,6 @@ const RecipeDetails = () => {
 
   const handleDelete = () => {
     deleteRecipe(id);
-    navigate('/');
   };
 
   return (
@@ -44,19 +44,7 @@ const RecipeDetails = () => {
             >
               Edit
             </Link>
-            <button 
-              onClick={handleDelete}
-              style={{
-                padding: '0.5rem 1rem',
-                background: '#f44336',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
-            >
-              Delete
-            </button>
+            <DeleteRecipeButton recipeId={id} onDelete={handleDelete} />
           </div>
         </div>
         

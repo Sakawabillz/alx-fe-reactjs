@@ -1,6 +1,7 @@
 // src/components/RecipeList.jsx
 import { Link } from 'react-router-dom';
 import useRecipeStore from '../store/recipeStore';
+import DeleteRecipeButton from './DeleteRecipeButton';
 
 const RecipeList = () => {
   const recipes = useRecipeStore(state => state.recipes);
@@ -100,29 +101,12 @@ const RecipeList = () => {
               >
                 Edit
               </Link>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (window.confirm('Are you sure you want to delete this recipe?')) {
-                    deleteRecipe(recipe.id);
-                  }
-                }}
-                style={{
-                  padding: '0.5rem 1rem',
-                  background: '#fff0f0',
-                  color: '#e74c3c',
-                  border: '1px solid #ffdddd',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  transition: 'background 0.2s',
-                  ':hover': {
-                    background: '#ffe0e0'
-                  }
-                }}
-              >
-                Delete
-              </button>
+              <div style={{ marginLeft: '1rem' }}>
+                <DeleteRecipeButton 
+                  recipeId={recipe.id}
+                  size="small"
+                />
+              </div>
             </div>
           </div>
         ))}
