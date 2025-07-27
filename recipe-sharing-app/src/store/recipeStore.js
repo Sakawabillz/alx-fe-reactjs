@@ -1,3 +1,4 @@
+// src/components/recipeStore.js
 import { create } from 'zustand';
 
 export const useRecipeStore = create((set) => ({
@@ -7,6 +8,11 @@ export const useRecipeStore = create((set) => ({
   setSearchTerm: (term) =>
     set(() => ({
       searchTerm: term,
+    })),
+
+  setRecipes: (newRecipes) =>
+    set(() => ({
+      recipes: newRecipes,
     })),
 
   addRecipe: (newRecipe) =>
