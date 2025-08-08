@@ -1,75 +1,67 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import { searchUser, getUserRepos } from './services';
+import { SearchBar, UserProfile, RepoList, Loading, ErrorMessage } from './components';
+import './App.css';
 
 function App() {
-  const [username, setUsername] = useState('')
-  const [userData, setUserData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [user, setUser] = useState(null);
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSearch = async (e) => {
-    e.preventDefault()
-    if (!username.trim()) return
-    
-    setLoading(true)
-    setError(null)
+  const handleSearch = async (username) => {
+    setLoading(true);
+    setError('');
     
     try {
-      const response = await fetch(`https://api.github.com/users/${username}`)
-      if (!response.ok) {
-        throw new Error('User not found')
+      // Fetch user data
+      const { data: userData, error: userError } = await searchUser(username);
+      
+      if (userError) {
+        setError(userError);
+        setUser(null);
+        setRepos([]);
+        return;
       }
-      const data = await response.json()
-      setUserData(data)
+      
+      setUser(userData);
+      
+      // Fetch user repositories
+      const { data: reposData } = await getUserRepos(username);
+      setRepos(reposData || []);
+      
     } catch (err) {
-      setError(err.message)
-      setUserData(null)
+      setError('An error occurred while fetching data. Please try again.');
+      console.error('Search error:', err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="app">
-      <h1>GitHub User Search</h1>
-      
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username"
-          className="search-input"
+      <header>
+        <h1>GitHub User Search</h1>
+        <SearchBar onSearch={handleSearch} loading={loading} />
+      </header>
+
+      <main>
+        {loading && <Loading />}
+        
+        <ErrorMessage 
+          message={error} 
+          onRetry={error ? () => handleSearch(user?.login || '') : null} 
         />
-        <button type="submit" className="search-button" disabled={loading}>
-          {loading ? 'Searching...' : 'Search'}
-        </button>
-      </form>
-
-      {error && <p className="error">{error}</p>}
-
-      {userData && (
-        <div className="user-card">
-          <img src={userData.avatar_url} alt={userData.name || userData.login} className="avatar" />
-          <h2>{userData.name || userData.login}</h2>
-          {userData.bio && <p>{userData.bio}</p>}
-          <div className="user-stats">
-            <span>Followers: {userData.followers}</span>
-            <span>Following: {userData.following}</span>
-            <span>Repos: {userData.public_repos}</span>
+        
+        {user && (
+          <div className="content">
+            <UserProfile user={user} />
+            <RepoList repos={repos} />
           </div>
-          <a 
-            href={userData.html_url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="profile-link"
-          >
-            View Profile
-          </a>
-        </div>
-      )}
+        )}
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
