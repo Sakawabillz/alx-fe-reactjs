@@ -54,7 +54,7 @@ const SearchBar = ({ onSearch, loading, disabled, placeholder = 'Enter GitHub us
           height="200"
         />
         <p className="search-error__message">
-          Looks like we can't find the user "{username}"
+          Looks like we cant find the user
         </p>
       </div>
     );
