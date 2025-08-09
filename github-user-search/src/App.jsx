@@ -14,6 +14,15 @@ function App() {
   const [error, setError] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
   const [rateLimit, setRateLimit] = useState({ remaining: 60, reset: 0 });
+  
+  // Format time until rate limit resets
+  const formatTimeUntilReset = (resetTimestamp) => {
+    if (!resetTimestamp) return '';
+    const now = new Date().getTime();
+    const diff = Math.max(0, resetTimestamp - now);
+    const minutes = Math.ceil(diff / (1000 * 60));
+    return `Rate limit resets in ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  };
 
   // Check rate limit on initial load
   useEffect(() => {
@@ -157,10 +166,9 @@ function App() {
               : 'Search GitHub username...'
           }
         />
-        
         {loading ? (
-          <div className="loading-container">
-            <Loading />
+          <div className="flex justify-center items-center min-h-[50vh]">
+            <Loading message="Loading user data..." />
           </div>
         ) : error ? (
           <div className="error-container">
@@ -170,18 +178,18 @@ function App() {
             />
           </div>
         ) : user ? (
-          <div className="results">
+          <div className="mt-6 space-y-6">
             <UserProfile user={user} />
             {repos.length > 0 && <RepoList repos={repos} />}
           </div>
         ) : hasSearched ? (
-          <div className="no-results">
-            <p>No user found. Please try another username.</p>
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-600 dark:text-gray-300">No user found. Please try another search.</p>
           </div>
         ) : (
-          <div className="welcome-message">
-            <h2>Welcome to GitHub User Search</h2>
-            <p>Enter a GitHub username above to get started</p>
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold mb-4">Welcome to GitHub User Search</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">Enter a GitHub username to get started</p>
             <div className="search-tips">
               <p>Try searching for:</p>
               <div className="example-searches">
