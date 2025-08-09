@@ -9,6 +9,37 @@ const githubApi = axios.create({
   }
 });
 
+// Alias for getUser to match expected function name
+export const fetchUserData = async (username) => {
+  try {
+    const response = await githubApi.get(`/users/${encodeURIComponent(username)}`);
+    return { 
+      data: {
+        avatar_url: response.data.avatar_url,
+        name: response.data.name || response.data.login,
+        login: response.data.login,
+        html_url: response.data.html_url,
+        public_repos: response.data.public_repos,
+        followers: response.data.followers,
+        following: response.data.following,
+        bio: response.data.bio,
+        location: response.data.location,
+        blog: response.data.blog
+      }, 
+      error: null 
+    };
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return { data: null, error: 'User not found' };
+    }
+    console.error('Error fetching user data:', error);
+    return { 
+      data: null, 
+      error: error.message || 'Failed to fetch user data. Please try again later.' 
+    };
+  }
+};
+
 export const searchUsers = async (query) => {
   try {
     const response = await githubApi.get(`/search/users?q=${encodeURIComponent(query)}`);
@@ -20,16 +51,9 @@ export const searchUsers = async (query) => {
 };
 
 export const getUser = async (username) => {
-  try {
-    const response = await githubApi.get(`/users/${encodeURIComponent(username)}`);
-    return response.data;
-  } catch (error) {
-    if (error.response && error.response.status === 404) {
-      throw new Error('User not found. Please check the username and try again.');
-    }
-    console.error('Error fetching user:', error);
-    throw new Error('Failed to fetch user data. Please try again later.');
-  }
+  const { data, error } = await fetchUserData(username);
+  if (error) throw new Error(error);
+  return data;
 };
 
 export const getUserRepos = async (username) => {
@@ -53,6 +77,7 @@ export const getUserActivity = async (username) => {
 };
 
 export default {
+  fetchUserData,
   searchUsers,
   getUser,
   getUserRepos,

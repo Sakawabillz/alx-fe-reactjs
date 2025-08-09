@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchUserData, getUserRepos, checkRateLimit } from './services/api';
-import SearchBar from './components/SearchBar';
+import Search from './components/Search';
 import UserProfile from './components/UserProfile';
 import RepoList from './components/RepoList';
 import Loading from './components/Loading';
@@ -145,10 +145,10 @@ function App() {
       </header>
 
       <main className="app-content">
-        <SearchBar 
+        <Search 
           onSearch={searchUser} 
-          loading={loading} 
-          disabled={isRateLimited}
+          loading={loading}
+          disabled={rateLimit.remaining === 0}
           placeholder={
             isRateLimited 
               ? `Rate limited - try again after ${rateLimitResetTime}`

@@ -1,5 +1,5 @@
 // Export all components from this file for cleaner imports
-export { default as SearchBar } from './SearchBar';
+export { default as Search } from './Search';
 export { default as UserProfile } from './UserProfile';
 export { default as RepoList } from './RepoList';
 export { default as Loading } from './Loading';
