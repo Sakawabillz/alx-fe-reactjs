@@ -149,10 +149,12 @@ function App() {
           onSearch={searchUser} 
           loading={loading}
           disabled={rateLimit.remaining === 0}
+          userData={user}
+          error={error}
           placeholder={
-            isRateLimited 
-              ? `Rate limited - try again after ${rateLimitResetTime}`
-              : 'Enter GitHub username...'
+            rateLimit.remaining === 0 
+              ? `Rate limited - try again after ${new Date(rateLimit.reset).toLocaleTimeString()}`
+              : 'Search GitHub username...'
           }
         />
         

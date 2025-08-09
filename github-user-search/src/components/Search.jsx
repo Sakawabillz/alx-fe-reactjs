@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 
-const SearchBar = ({ onSearch, loading, disabled, placeholder = 'Enter GitHub username...' }) => {
+const SearchBar = ({ onSearch, loading, disabled, placeholder = 'Enter GitHub username...', userData, error: propError }) => {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -35,6 +36,47 @@ const SearchBar = ({ onSearch, loading, disabled, placeholder = 'Enter GitHub us
       inputRef.current.focus();
     }
   };
+
+  // Display loading state
+  if (loading) {
+    return <Loading message="Searching GitHub" />;
+  }
+
+  // Display error state
+  if (propError) {
+    return (
+      <div className="search-error" role="alert">
+        <img 
+          src="/user-not-found.svg" 
+          alt="User not found" 
+          className="search-error__image"
+          width="200"
+          height="200"
+        />
+        <p className="search-error__message">
+          Looks like we can't find the user "{username}"
+        </p>
+      </div>
+    );
+  }
+
+  // Display user data if available
+  if (userData) {
+    return (
+      <div className="user-result">
+        <div className="user-avatar">
+          <img 
+            src={userData.avatar_url} 
+            alt={`${userData.login}'s avatar`} 
+            className="user-avatar__image"
+            width="120"
+            height="120"
+          />
+          <h2 className="user-avatar__username">{userData.login}</h2>
+        </div>
+      </div>
+    );
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
@@ -152,17 +194,33 @@ const SearchBar = ({ onSearch, loading, disabled, placeholder = 'Enter GitHub us
   );
 };
 
-SearchBar.propTypes = {
+Search.propTypes = {
   onSearch: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  userData: PropTypes.shape({
+    avatar_url: PropTypes.string,
+    login: PropTypes.string,
+    name: PropTypes.string,
+    html_url: PropTypes.string,
+    public_repos: PropTypes.number,
+    followers: PropTypes.number,
+    following: PropTypes.number,
+    bio: PropTypes.string,
+    location: PropTypes.string,
+    blog: PropTypes.string
+  }),
+  error: PropTypes.string
 };
 
 // Add default props for better documentation
-SearchBar.defaultProps = {
+Search.defaultProps = {
   loading: false,
-  disabled: false
+  disabled: false,
+  placeholder: 'Enter GitHub username...',
+  userData: null,
+  error: null
 };
 
-export default SearchBar;
+export default Search;

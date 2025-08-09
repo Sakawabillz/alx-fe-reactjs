@@ -612,6 +612,56 @@ a:hover {
   }
 }
 
+/* Search Component Styles */
+.search-error {
+  text-align: center;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin: 2rem 0;
+}
+
+.search-error__image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.search-error__message {
+  color: var(--error-color);
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.user-result {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.user-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar__image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.user-avatar__username {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
 /* Repository List Styles */
 .repo-list {
   margin: var(--spacing-2xl) 0;
