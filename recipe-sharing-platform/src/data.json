@@ -2,61 +2,63 @@
   {
     "id": 1,
     "title": "Spaghetti Carbonara",
-    "description": "Classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.",
-    "image": "https://images.unsplash.com/photo-1603133872878-684f3fdf9932",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://via.placeholder.com/300x200",
     "ingredients": [
       "200g spaghetti",
-      "100g pancetta",
-      "2 eggs",
-      "50g Parmesan cheese",
-      "Salt & black pepper"
+      "100g pancetta or bacon",
+      "2 large eggs",
+      "50g grated Parmesan cheese",
+      "Black pepper"
     ],
-    "instructions": [
-      "Cook spaghetti in salted boiling water.",
-      "Fry pancetta until crispy.",
-      "Whisk eggs and Parmesan together.",
-      "Combine pasta, pancetta, and egg mixture.",
-      "Season with black pepper and serve."
+    "steps": [
+      "Cook spaghetti according to package instructions.",
+      "Fry pancetta until crisp.",
+      "Beat eggs with Parmesan and black pepper.",
+      "Drain spaghetti and mix with pancetta and egg mixture off the heat.",
+      "Serve immediately with extra Parmesan."
     ]
   },
   {
     "id": 2,
-    "title": "Chicken Curry",
-    "description": "A flavorful chicken curry simmered with onions, tomatoes, and aromatic spices.",
-    "image": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f",
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken cooked in a smooth buttery & creamy tomato-based gravy.",
+    "image": "https://via.placeholder.com/300x200",
     "ingredients": [
-      "500g chicken thighs",
-      "2 onions",
-      "3 tomatoes",
-      "2 tbsp curry powder",
-      "200ml coconut milk"
+      "500g chicken breast",
+      "200g yogurt",
+      "2 tbsp tikka masala spice mix",
+      "1 onion, chopped",
+      "2 tomatoes, pureed",
+      "100ml cream"
     ],
-    "instructions": [
-      "Sauté onions until golden.",
-      "Add curry powder and stir for 1 min.",
-      "Add tomatoes and cook until soft.",
-      "Add chicken pieces and cook until browned.",
-      "Pour in coconut milk and simmer until chicken is cooked."
+    "steps": [
+      "Marinate chicken in yogurt and tikka spice mix for 1 hour.",
+      "Grill chicken until cooked.",
+      "Sauté onion, add tomato puree, and cook until thickened.",
+      "Add cream and cooked chicken, simmer for 5 minutes.",
+      "Serve with rice or naan."
     ]
   },
   {
     "id": 3,
-    "title": "Vegetable Stir Fry",
-    "description": "A quick and healthy stir fry with mixed vegetables and soy sauce.",
-    "image": "https://images.unsplash.com/photo-1512058564366-c9e8b12f7c5b",
+    "title": "Chocolate Chip Cookies",
+    "summary": "Soft and chewy cookies loaded with chocolate chips.",
+    "image": "https://via.placeholder.com/300x200",
     "ingredients": [
-      "1 red bell pepper",
-      "1 broccoli head",
-      "2 carrots",
-      "2 tbsp soy sauce",
-      "1 tbsp sesame oil"
+      "200g flour",
+      "100g butter",
+      "150g sugar",
+      "1 egg",
+      "100g chocolate chips",
+      "1 tsp vanilla extract"
     ],
-    "instructions": [
-      "Chop all vegetables into bite-sized pieces.",
-      "Heat sesame oil in a wok.",
-      "Stir fry carrots, broccoli, and bell pepper for 5 minutes.",
-      "Add soy sauce and toss well.",
-      "Serve hot with rice or noodles."
+    "steps": [
+      "Preheat oven to 180°C (350°F).",
+      "Cream butter and sugar together.",
+      "Add egg and vanilla, mix well.",
+      "Fold in flour and chocolate chips.",
+      "Scoop onto baking tray and bake for 12-15 minutes."
     ]
   }
 ]
