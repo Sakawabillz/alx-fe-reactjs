@@ -1,32 +1,20 @@
-import { useState } from 'react';
-import HomePage from './components/HomePage';
+// src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import RecipeDetail from "./components/RecipeDetail";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <header className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-blue-600">🍳 Recipe Sharing Platform</h1>
-        <p className="text-gray-600 mt-2">Vite + React + Tailwind is set up correctly.</p>
-      </header>
+    <Router>
+      <Routes>
+        {/* Home Page route */}
+        <Route path="/" element={<HomePage />} />
 
-      <main className="max-w-5xl mx-auto mt-8 space-y-8">
-        {/* Tailwind demo card */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm">
-          <p className="mb-4">Tailwind demo button:</p>
-          <button
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
-            onClick={() => setCount(c => c + 1)}
-          >
-            Count: {count}
-          </button>
-        </div>
-
-        {/* Your HomePage component */}
-        <HomePage />
-      </main>
-    </div>
+        {/* Recipe Detail route with dynamic ID */}
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
