@@ -2,13 +2,61 @@
   {
     "id": 1,
     "title": "Spaghetti Carbonara",
-    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "description": "Classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.",
+    "image": "https://images.unsplash.com/photo-1603133872878-684f3fdf9932",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 eggs",
+      "50g Parmesan cheese",
+      "Salt & black pepper"
+    ],
+    "instructions": [
+      "Cook spaghetti in salted boiling water.",
+      "Fry pancetta until crispy.",
+      "Whisk eggs and Parmesan together.",
+      "Combine pasta, pancetta, and egg mixture.",
+      "Season with black pepper and serve."
+    ]
   },
   {
     "id": 2,
-    "title": "Chicken Tikka Masala",
-    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "title": "Chicken Curry",
+    "description": "A flavorful chicken curry simmered with onions, tomatoes, and aromatic spices.",
+    "image": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f",
+    "ingredients": [
+      "500g chicken thighs",
+      "2 onions",
+      "3 tomatoes",
+      "2 tbsp curry powder",
+      "200ml coconut milk"
+    ],
+    "instructions": [
+      "Sauté onions until golden.",
+      "Add curry powder and stir for 1 min.",
+      "Add tomatoes and cook until soft.",
+      "Add chicken pieces and cook until browned.",
+      "Pour in coconut milk and simmer until chicken is cooked."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Vegetable Stir Fry",
+    "description": "A quick and healthy stir fry with mixed vegetables and soy sauce.",
+    "image": "https://images.unsplash.com/photo-1512058564366-c9e8b12f7c5b",
+    "ingredients": [
+      "1 red bell pepper",
+      "1 broccoli head",
+      "2 carrots",
+      "2 tbsp soy sauce",
+      "1 tbsp sesame oil"
+    ],
+    "instructions": [
+      "Chop all vegetables into bite-sized pieces.",
+      "Heat sesame oil in a wok.",
+      "Stir fry carrots, broccoli, and bell pepper for 5 minutes.",
+      "Add soy sauce and toss well.",
+      "Serve hot with rice or noodles."
+    ]
   }
 ]
