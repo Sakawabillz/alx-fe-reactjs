@@ -22,13 +22,14 @@ const FormikForm = () => {
         initialValues={{ username: "", email: "", password: "" }}
         validationSchema={RegistrationSchema}
         onSubmit={(values, { resetForm }) => {
-          console.log("Formik submitted:", values);
+          console.log("✅ Formik Submitted:", values);
           alert("Registration successful!");
           resetForm();
         }}
       >
         {({ isSubmitting }) => (
           <Form>
+            {/* Username */}
             <div className="mb-4">
               <label className="block text-gray-700">Username</label>
               <Field
@@ -43,6 +44,7 @@ const FormikForm = () => {
               />
             </div>
 
+            {/* Email */}
             <div className="mb-4">
               <label className="block text-gray-700">Email</label>
               <Field
@@ -57,6 +59,7 @@ const FormikForm = () => {
               />
             </div>
 
+            {/* Password */}
             <div className="mb-4">
               <label className="block text-gray-700">Password</label>
               <Field
@@ -71,6 +74,7 @@ const FormikForm = () => {
               />
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
