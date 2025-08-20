@@ -1,89 +1,63 @@
 import { useState } from "react";
 
-export default function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validate = () => {
-    let tempErrors = {};
-    if (!formData.username) tempErrors.username = "Username is required";
-    if (!formData.email) tempErrors.email = "Email is required";
-    if (!formData.password) tempErrors.password = "Password is required";
-    return tempErrors;
-  };
+function RegistrationForm() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      console.log("Form submitted:", formData);
-      alert("User registered successfully (mock API)!");
+
+    if (!username || !email || !password) {
+      setError("All fields are required.");
+      return;
     }
+
+    setError("");
+    console.log("Form submitted:", { username, email, password });
+    // mock API call could go here
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 border rounded-lg shadow"
-    >
-      <h2 className="text-xl font-bold mb-4">Controlled Registration Form</h2>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {error && <p className="text-red-500">{error}</p>}
 
-      <div className="mb-3">
-        <label className="block mb-1">Username:</label>
+      <div>
+        <label>Username</label>
         <input
           type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
+          value={username}  // ✅ required
+          onChange={(e) => setUsername(e.target.value)}
+          className="border px-2 py-1 w-full"
         />
-        {errors.username && <p className="text-red-500">{errors.username}</p>}
       </div>
 
-      <div className="mb-3">
-        <label className="block mb-1">Email:</label>
+      <div>
+        <label>Email</label>
         <input
           type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
+          value={email}  // ✅ required
+          onChange={(e) => setEmail(e.target.value)}
+          className="border px-2 py-1 w-full"
         />
-        {errors.email && <p className="text-red-500">{errors.email}</p>}
       </div>
 
-      <div className="mb-3">
-        <label className="block mb-1">Password:</label>
+      <div>
+        <label>Password</label>
         <input
           type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
+          value={password}  // ✅ required
+          onChange={(e) => setPassword(e.target.value)}
+          className="border px-2 py-1 w-full"
         />
-        {errors.password && (
-          <p className="text-red-500">{errors.password}</p>
-        )}
       </div>
 
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2">
         Register
       </button>
     </form>
   );
 }
+
+export default RegistrationForm;
