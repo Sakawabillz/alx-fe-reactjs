@@ -1,50 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-export default function RegistrationForm() {
-  const [form, setForm] = useState({ username: '', email: '', password: '' });
-  const [msg, setMsg] = useState('');
+const RegistrationForm = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setMsg('');
-    if (!form.username || !form.email || !form.password) {
-      setMsg('Please fill in all fields.');
-      return;
+
+    // reset errors
+    let validationErrors = {};
+
+    if (!username) {
+      validationErrors.username = "Username is required";
     }
-    try {
-      // mock API call (JSONPlaceholder)
-      const res = await fetch('https://jsonplaceholder.typicode.com/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      setMsg('Mock registered — id: ' + (data.id ?? 'n/a'));
-      setForm({ username: '', email: '', password: '' });
-    } catch (err) {
-      setMsg('Network error');
+    if (!email) {
+      validationErrors.email = "Email is required";
+    }
+    if (!password) {
+      validationErrors.password = "Password is required";
+    }
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      // Simulate API call
+      console.log("User registered:", { username, email, password });
+      alert("Registration successful!");
+
+      // reset form
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 420 }}>
-      <h2>Controlled Registration Form</h2>
-      <div>
-        <label>Username</label><br />
-        <input name="username" value={form.username} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Email</label><br />
-        <input name="email" value={form.email} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Password</label><br />
-        <input name="password" type="password" value={form.password} onChange={handleChange} />
-      </div>
-      <button type="submit">Register</button>
-      <div style={{ marginTop: 10, color: 'green' }}>{msg}</div>
-    </form>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow">
+      <h2 className="text-2xl font-bold mb-4">User Registration</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-gray-700">Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full px-3 py-2 border rounded"
+          />
+          {errors.username && (
+            <p className="text-red-500 text-sm">{errors.username}</p>
+          )}
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-3 py-2 border rounded"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-3 py-2 border rounded"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Register
+        </button>
+      </form>
+    </div>
   );
-}
+};
+
+export default RegistrationForm;
