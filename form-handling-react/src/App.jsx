@@ -1,14 +1,16 @@
-import RegistrationForm from "./components/RegistrationForm";
-import FormikForm from "./components/FormikForm";
+import React, { useState } from 'react';
+import RegistrationForm from './components/RegistrationForm';
+import FormikForm from './components/formikForm';
 
-function App() {
+export default function App() {
+  const [which, setWhich] = useState('controlled');
   return (
-    <div className="p-6">
-      <RegistrationForm />
-      <div className="my-8" />
-      <FormikForm />
+    <div style={{ padding: 20 }}>
+      <div style={{ marginBottom: 12 }}>
+        <button onClick={() => setWhich('controlled')}>Controlled</button>{' '}
+        <button onClick={() => setWhich('formik')}>Formik</button>
+      </div>
+      {which === 'controlled' ? <RegistrationForm /> : <FormikForm />}
     </div>
   );
 }
-
-export default App;
