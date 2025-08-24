@@ -1,4 +1,3 @@
-cat > src/App.jsx <<'EOF'
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import Home from "./pages/Home.jsx";
@@ -37,4 +36,3 @@ export default function App() {
     </Routes>
   );
 }
-EOF
