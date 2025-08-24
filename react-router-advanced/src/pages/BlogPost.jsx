@@ -1,15 +1,15 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const BlogPost = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Dynamic routing - gets id from URL
   const navigate = useNavigate();
 
-  // Mock blog post data
+  // Mock blog post data - demonstrates dynamic content based on URL parameter
   const blogPosts = {
-    1: { title: 'First Blog Post', content: 'This is the content of the first blog post.' },
-    2: { title: 'Second Blog Post', content: 'This is the content of the second blog post.' },
-    3: { title: 'Third Blog Post', content: 'This is the content of the third blog post.' }
+    1: { title: 'First Blog Post', content: 'This is the content of the first blog post.', author: 'John Doe' },
+    2: { title: 'Second Blog Post', content: 'This is the content of the second blog post.', author: 'Jane Smith' },
+    3: { title: 'Third Blog Post', content: 'This is the content of the third blog post.', author: 'Bob Johnson' }
   };
 
   const post = blogPosts[id];
@@ -29,17 +29,24 @@ const BlogPost = () => {
       <button onClick={() => navigate(-1)} style={{ marginBottom: '1rem' }}>
         ← Back
       </button>
+      
+      {/* Dynamic content based on URL parameter */}
       <h1>{post.title}</h1>
-      <p>Post ID: {id}</p>
-      <div style={{ marginTop: '1rem' }}>
+      <p><strong>Post ID:</strong> {id}</p>
+      <p><strong>Author:</strong> {post.author}</p>
+      
+      <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f9f9f9' }}>
         {post.content}
       </div>
       
+      {/* Dynamic routing examples */}
       <div style={{ marginTop: '2rem' }}>
-        <h3>Other Posts:</h3>
+        <h3>Other Posts (Dynamic Routing Examples):</h3>
         {Object.keys(blogPosts).filter(postId => postId !== id).map(postId => (
-          <div key={postId}>
-            <Link to={`/blog/${postId}`}>Blog Post {postId}</Link>
+          <div key={postId} style={{ margin: '0.5rem 0' }}>
+            <Link to={`/blog/${postId}`}>
+              Blog Post {postId}: {blogPosts[postId].title}
+            </Link>
           </div>
         ))}
       </div>
