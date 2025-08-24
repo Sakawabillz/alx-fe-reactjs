@@ -1,61 +1,51 @@
-import React, { useState } from 'react';
-import AddTodoForm from './AddTodoForm';
+import React, { useState } from "react";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Build a todo app', completed: true },
-    { id: 3, text: 'Write tests', completed: false }
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build Todo App", completed: true },
   ]);
+  const [newTodo, setNewTodo] = useState("");
 
-  const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      completed: false
-    };
-    setTodos([...todos, newTodo]);
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo("");
   };
 
   const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+    setTodos(
+      todos.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      )
+    );
   };
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((t) => t.id !== id));
   };
 
   return (
-    <div data-testid="todo-list">
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      
+    <div>
+      <h2>Todo List</h2>
+      <form onSubmit={addTodo}>
+        <input
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          placeholder="Add a new todo"
+        />
+        <button type="submit">Add</button>
+      </form>
       <ul>
-        {todos.map(todo => (
-          <li 
-            key={todo.id} 
-            data-testid={`todo-${todo.id}`}
-            style={{ 
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              margin: '10px 0'
-            }}
+        {todos.map((t) => (
+          <li
+            key={t.id}
+            onClick={() => toggleTodo(t.id)}
+            style={{ textDecoration: t.completed ? "line-through" : "none" }}
           >
-            <span 
-              onClick={() => toggleTodo(todo.id)}
-              style={{ cursor: 'pointer', marginRight: '10px' }}
-              data-testid={`todo-text-${todo.id}`}
-            >
-              {todo.text}
-            </span>
-            <button 
-              onClick={() => deleteTodo(todo.id)}
-              data-testid={`delete-${todo.id}`}
-              style={{ marginLeft: '10px' }}
-            >
-              Delete
-            </button>
+            {t.text}
+            <button onClick={(e) => { e.stopPropagation(); deleteTodo(t.id); }}>Delete</button>
           </li>
         ))}
       </ul>
