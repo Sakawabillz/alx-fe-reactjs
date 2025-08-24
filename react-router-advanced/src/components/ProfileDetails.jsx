@@ -1,17 +1,8 @@
-import React from 'react';
-import { useAuth } from '../context/AuthContext';
-
-const ProfileDetails = () => {
-  const { user } = useAuth();
-
+export default function ProfileDetails() {
   return (
     <div>
       <h2>Profile Details</h2>
-      <p>Username: {user?.username}</p>
-      <p>Email: {user?.username}@example.com</p>
-      <p>Member since: {new Date().toLocaleDateString()}</p>
+      <p>This is a nested route within Profile.</p>
     </div>
   );
-};
-
-export default ProfileDetails;
+}

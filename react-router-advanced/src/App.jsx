@@ -1,56 +1,40 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
-import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
-import Profile from './components/Profile';
-import ProfileDetails from './components/ProfileDetails';
-import ProfileSettings from './components/ProfileSettings';
-import BlogPost from './pages/BlogPost';
-import './App.css';
+cat > src/App.jsx <<'EOF'
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout.jsx";
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Blog from "./pages/Blog.jsx";
+import BlogPost from "./pages/BlogPost.jsx"; // dynamic route: /blog/:postId
+import Profile from "./components/Profile.jsx";
+import Login from "./pages/Login.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-function App() {
+export default function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div style={{ padding: '1rem' }}>
-            <Routes>
-              {/* Basic routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-              
-              {/* Dynamic routing - handles variable URLs */}
-              <Route path="/blog/:id" element={<BlogPost />} />
-              
-              {/* Protected nested routes */}
-              <Route 
-                path="/profile" 
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              >
-                {/* Nested routes within Profile */}
-                <Route index element={<div>Select a profile section above</div>} />
-                <Route path="details" element={<ProfileDetails />} />
-                <Route path="settings" element={<ProfileSettings />} />
-              </Route>
-              
-              {/* Catch-all route */}
-              <Route path="*" element={<div>Page not found</div>} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* Public routes */}
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:postId" element={<BlogPost />} /> {/* Dynamic routing implemented */}
+        <Route path="login" element={<Login />} />
+
+        {/* Protected parent route; children are handled inside Profile.jsx */}
+        <Route
+          path="profile/*"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
+EOF
