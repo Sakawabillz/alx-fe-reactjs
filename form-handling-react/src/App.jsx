@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
-import FormikForm from './components/formikForm';
+import formikForm from './components/formikForm'; // Note: lowercase 'f'
 import './App.css';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       
       <div style={{margin: '20px 0'}}>
         <h2>{showFormik ? 'Formik Form' : 'Controlled Components Form'}</h2>
-        {showFormik ? <FormikForm /> : <RegistrationForm />}
+        {showFormik ? React.createElement(formikForm) : <RegistrationForm />}
       </div>
     </div>
   );
