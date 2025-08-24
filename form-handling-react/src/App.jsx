@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
-import formikForm from './components/formikForm'; // Note: lowercase 'f'
+import formikForm from './components/formikForm'; // This will now import the .js file
 import './App.css';
 
 function App() {
