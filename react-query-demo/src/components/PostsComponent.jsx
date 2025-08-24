@@ -21,6 +21,8 @@ const PostsComponent = () => {
     queryFn: fetchPosts,
     staleTime: 5 * 60 * 1000, // 5 minutes - demonstrates caching
     cacheTime: 10 * 60 * 1000, // 10 minutes - demonstrates caching
+    refetchOnWindowFocus: false, // Demonstrates caching control
+    keepPreviousData: true, // Demonstrates caching behavior
   });
 
   // Handle loading state
@@ -36,10 +38,20 @@ const PostsComponent = () => {
         <button onClick={() => refetch()}>
           Refetch Posts
         </button>
+        <button 
+          onClick={() => refetch()} 
+          style={{ marginLeft: '10px' }}
+        >
+          Manual Refresh
+        </button>
         <p>
           <small>
-            Posts are cached for 5 minutes. Navigate away and come back to see caching in action.
-            Click "Refetch Posts" to manually update data.
+            React Query Caching Features Demonstrated:
+            <br />• refetchOnWindowFocus: false - Won't refetch when window regains focus
+            <br />• keepPreviousData: true - Keeps previous data while fetching new data
+            <br />• staleTime: 5 minutes - Data considered fresh for 5 minutes
+            <br />• cacheTime: 10 minutes - Data stays in cache for 10 minutes
+            <br />Click "Refetch Posts" to manually update data and see caching in action.
           </small>
         </p>
       </div>
