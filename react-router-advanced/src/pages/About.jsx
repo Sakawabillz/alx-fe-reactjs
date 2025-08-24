@@ -1,0 +1,12 @@
+import React from 'react';
+
+const About = () => {
+  return (
+    <div>
+      <h1>About Page</h1>
+      <p>This is a demo of advanced React Router features including nested routes, dynamic routes, and protected routes.</p>
+    </div>
+  );
+};
+
+export default About;
